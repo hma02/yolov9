@@ -105,7 +105,7 @@ def export_onnx(model, im, file, opset, dynamic, simplify, prefix=colorstr('ONNX
     torch.onnx.export(
         model.cpu() if dynamic else model,  # --dynamic only compatible with cpu
         im.cpu() if dynamic else im,
-        f,
+        str(f),
         verbose=False,
         opset_version=opset,
         do_constant_folding=True,
