@@ -289,8 +289,8 @@ def train(hyp, opt, device, callbacks):  # hyp is path/to/hyp.yaml or hyp dictio
             callbacks.run('on_train_batch_start')
             ni = i + nb * epoch  # number integrated batches (since train start)
             
-            if (i + 1) % 50 == 0:
-                pbar.set_description(f"Epoch {epoch+1}/{epochs}, Batch {i+1}/{len(train_loader)}")
+            if (i + 1) % 50 == 0 and RANK in {-1, 0}:
+                pbar.set_postfix(Epoch=epoch, Batch=i)
 
             imgs = imgs.to(device, non_blocking=True).float() / 255  # uint8 to float32, 0-255 to 0.0-1.0
 
